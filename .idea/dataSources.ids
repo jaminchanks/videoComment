@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - testdb2@localhost" uuid="cf6bea7f-10aa-4fb0-b4e1-afef0fa5b6f2">
+    <database-info product="MySQL" version="5.5.43-0ubuntu0.14.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <schema name="" catalog="testdb2"/>
+    <table name="user" schema="" catalog="testdb2" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="account" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="userName" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="birthday" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="email" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="marks" sqlType="VARCHAR" precision="160" scale="0" nullable="true" jdbcType="12"/>
+      <column name="identity" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+  </data-source>
+</component>

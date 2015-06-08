@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.jaminchanks.pojo.User" table="user" schema="" catalog="testdb2">
+        <id name="id">
+            <column name="id" sql-type="int" not-null="true"/>
+        </id>
+        <property name="account">
+            <column name="account" sql-type="varchar" length="20" not-null="true"/>
+        </property>
+        <property name="password">
+            <column name="password" sql-type="varchar" length="45" not-null="true"/>
+        </property>
+        <property name="userName">
+            <column name="userName" sql-type="varchar" length="20" not-null="true"/>
+        </property>
+        <property name="birthday">
+            <column name="birthday" sql-type="date" not-null="true"/>
+        </property>
+        <property name="email">
+            <column name="email" sql-type="varchar" length="45" not-null="true"/>
+        </property>
+        <property name="marks">
+            <column name="marks" sql-type="varchar" length="160"/>
+        </property>
+        <property name="identity">
+            <column name="identity" sql-type="int"/>
+        </property>
+    </class>
+</hibernate-mapping>
