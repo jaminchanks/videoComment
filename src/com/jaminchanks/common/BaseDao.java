@@ -19,9 +19,13 @@ public interface BaseDao<T>  {
     void delete(Class<T> entityClazz, Serializable id);
     // 获取所有实体
     List<T> findAll(Class<T> entityClazz);
-    //根据hql语句获取单个个体
+    //根据hql语句获取实体
     List<T> find(String hql, Object... params);
     // 获取实体总数
     long findCount(Class<T> entityClazz);
+
+    //按页查询
+    List<T> findByPage(String hql , int pageNo, int pageSize
+            , Object... params);
 
 }

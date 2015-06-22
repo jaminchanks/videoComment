@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.jaminchanks.pojo.Video" table="video" schema="" catalog="testdb2">
+        <id name="videoId">
+            <column name="video_id" sql-type="int" not-null="true"/>
+        </id>
+
+        <many-to-one name="user" class="com.jaminchanks.pojo.User" lazy="false">
+            <column name="user_id" not-null="true"/>
+        </many-to-one>
+
+        <property name="upTime">
+            <column name="up_time" sql-type="date" not-null="true"/>
+        </property>
+        <property name="likeNumbers">
+            <column name="like_numbers" sql-type="int" not-null="true"/>
+        </property>
+        <property name="commentsId">
+            <column name="comments_id" sql-type="int" not-null="true"/>
+        </property>
+        <property name="videoSrc">
+            <column name="video_src" sql-type="varchar" length="160"/>
+        </property>
+        <property name="videoWrap">
+            <column name="video_wrap" sql-type="varchar" length="160"/>
+        </property>
+        <property name="catalog">
+            <column name="catalog" sql-type="varchar" length="45" not-null="true"/>
+        </property>
+        <property name="videoName">
+            <column name="video_name" sql-type="varchar" length="64" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

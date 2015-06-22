@@ -1,9 +1,10 @@
 package com.jaminchanks.pojo;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
- * Created by jamin on 6/7/15.
+ * Created by jamin on 6/8/15.
  */
 public class User {
     private int id;
@@ -13,7 +14,8 @@ public class User {
     private Date birthday;
     private String email;
     private String marks;
-    private Integer identity;
+    private Integer identity = 0;
+    private String head = "head.jpg";
 
     public int getId() {
         return id;
@@ -52,6 +54,8 @@ public class User {
     }
 
     public void setBirthday(Date birthday) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.format(birthday);
         this.birthday = birthday;
     }
 
@@ -79,6 +83,14 @@ public class User {
         this.identity = identity;
     }
 
+    public String getHead() {
+        return head;
+    }
+
+    public void setHead(String head) {
+        this.head = head;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -94,6 +106,7 @@ public class User {
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
         if (marks != null ? !marks.equals(user.marks) : user.marks != null) return false;
         if (identity != null ? !identity.equals(user.identity) : user.identity != null) return false;
+        if (head != null ? !head.equals(user.head) : user.head != null) return false;
 
         return true;
     }
@@ -108,6 +121,7 @@ public class User {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (marks != null ? marks.hashCode() : 0);
         result = 31 * result + (identity != null ? identity.hashCode() : 0);
+        result = 31 * result + (head != null ? head.hashCode() : 0);
         return result;
     }
 }

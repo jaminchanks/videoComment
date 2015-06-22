@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN"
+        "/home/jamin/Java/apache-tomcat-8.0.22/xwork-validator-1.0.2.dtd">
+
+<validators>
+        <field name="user.userName">
+                <field-validator type="stringlength">
+                        <param name="minLength">3</param>
+                        <param name="maxLength">15</param>
+                        <message>xxxxxxxxxxx</message>
+                </field-validator>
+        </field>
+        <field name="user.password">
+                <field-validator type="stringlength">
+                        <param name="minLength">3</param>
+                        <param name="maxLength">15</param>
+                        <message>xxxxxxxxxxx</message>
+                </field-validator>
+        </field>
+</validators>

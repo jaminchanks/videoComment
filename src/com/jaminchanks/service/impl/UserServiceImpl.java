@@ -3,6 +3,7 @@ package com.jaminchanks.service.impl;
 import com.jaminchanks.dao.UserDao;
 import com.jaminchanks.pojo.User;
 import com.jaminchanks.service.UserService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Created by jamin on 6/5/15.
  */
+
 public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
@@ -23,8 +25,19 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Serializable addUser(User user){
-        return userDao.save(user);
+    public int addUser(User user){
+        //user的默认权限和头像在这里设置
+        user.setIdentity(0);
+        user.setHead("head.jpg");
+        //查询有无相同的账户名
+        List<User> userList = userDao.find("from User where account=?", user.getAccount());
+        if (userList != null && userList.size() != 0) {
+            return -1;
+        }
+        else{
+            return (Integer)userDao.save(user); //这里总是返回0，不知道为什么
+        }
+
     }
 
     @Override
@@ -38,13 +51,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findUser(String hql, String name, String pass) {
-        return userDao.find(hql, name, pass);
-    }
-
-    @Override
-    public User findOne(String hql, int id) {
-        return userDao.find(hql, id).get(0);
+    public List<User> findUsers(String hql, Object... params) {
+        return userDao.find(hql, params);
     }
 
     @Override

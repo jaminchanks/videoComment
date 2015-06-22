@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.jaminchanks.pojo.Comment" table="comment" schema="" catalog="testdb2">
+        <id name="commentId">
+            <column name="comment_id" sql-type="int" not-null="true"/>
+        </id>
+        <many-to-one name="user" class="com.jaminchanks.pojo.User" lazy="false">
+            <column name="user_id" not-null="true"/>
+        </many-to-one>
+        <property name="content">
+            <column name="content" sql-type="varchar" length="1024" not-null="true" />
+        </property>
+        <property name="commentTo">
+            <column name="comment_to" sql-type="int"/>
+        </property>
+        <property name="videoId">
+            <column name="video_id" sql-type="int" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

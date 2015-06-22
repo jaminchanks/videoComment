@@ -11,8 +11,51 @@
         <constant name="struts.objectFactory.spring.autoWire" value="name" />
         <package name="common" extends="struts-default">
                 <action name="login" class="com.jaminchanks.action.UserAction" method="login" >
-                        <result name="success">/result/success.jsp</result>
-                        <result name="input">/result/error.jsp</result>
+                        <result name="success">/result/loginSuccess.jsp</result>
+                        <result name="input">/login.jsp</result>
+                </action>
+
+                <action name="register" class="com.jaminchanks.action.UserAction" method="register" >
+                        <result name="success">/login.jsp</result>
+                        <result name="input">/register.jsp</result>
+                        <result name="register">/register.jsp</result>
+                </action>
+
+                <action name="logOut" class="com.jaminchanks.action.UserAction" method="logOut">
+                        <result name="success">/index.jsp</result>
+                </action>
+
+                <action name="showUserDetail" class="com.jaminchanks.action.UserAction" method="showUserDetail">
+                        <result name="success">/htmls/user/user-main.jsp</result>
+                        <result name="error">/result/loginError.jsp</result>
+                </action>
+
+                <action name="showVideosByCatalog" class="com.jaminchanks.action.VideoAction" method="showVideosByCatalog">
+                        <result name="success">/main.jsp</result>
+                </action>
+
+                <action name="videoToBeShow" class="com.jaminchanks.action.VideoAction" method="showVideoById">
+                        <result name="success">/htmls/video/videoToBeShow.jsp</result>
+                </action>
+
+                <action name="updateUser" class="com.jaminchanks.action.UserAction" method="updateUser">
+                        <result name="success">/htmls/user/myAccount.jsp</result>
+                </action>
+
+                <action name="showVideoComment" class="com.jaminchanks.action.CommentAction" method="showComments" >
+                        <result name="success">/htmls/comment/comments.jsp</result>
+                        <result name="error">/result/noComments.jsp</result>
+                </action>
+
+
+                <action name="testAction" class="com.jaminchanks.action.testAction">
+                        <result name="success">/include/top.jsp</result>
+                        <result name="input">/logonTest.jsp</result>
+                </action>
+
+                <action name="addComment" class="com.jaminchanks.action.CommentAction" method="addComment">
+                        <result name="success" type="redirectAction">showVideoComment</result>
+                        <result name="error">/result/loginError.jsp</result>
                 </action>
         </package>
 </struts>

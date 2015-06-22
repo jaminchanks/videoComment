@@ -3,6 +3,7 @@ package com.jaminchanks.common.impl;
 import com.jaminchanks.common.BaseDao;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Created by jamin on 6/7/15.
  */
+@Transactional
 public class BaseDaoHibernate4Impl<T> implements BaseDao<T> {
     // DAO组件进行持久化操作底层依赖的SessionFactory组件
     private SessionFactory sessionFactory;
@@ -94,7 +96,7 @@ public class BaseDaoHibernate4Impl<T> implements BaseDao<T> {
         // 为包含占位符的HQL语句设置参数
         for(int i = 0 , len = params.length ; i < len ; i++)
         {
-            query.setParameter(i + "" , params[i]);
+            query.setParameter(i, params[i]);
         }
         return (List<T>)query.list();
     }
@@ -135,7 +137,7 @@ public class BaseDaoHibernate4Impl<T> implements BaseDao<T> {
         // 为包含占位符的HQL语句设置参数
         for(int i = 0 , len = params.length ; i < len ; i++)
         {
-            query.setParameter(i + "" , params[i]);
+            query.setParameter(i, params[i]);
         }
         // 执行分页，并返回查询结果
         return query.setFirstResult((pageNo - 1) * pageSize)

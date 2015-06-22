@@ -14,7 +14,8 @@
 
 
 </head>
-<body style="padding-top: 40px; padding-bottom: 40px; background-color: #eee;">
+<body style="padding-top: 40px; padding-bottom: 40px;
+ background: url(/resources/img/chuyin.jpg) no-repeat; background-size: 100% auto; ">
 <s:include value="/include/top.jsp" />
 <!--生成验证码 -->
 <script language="javascript" type="text/javascript">
@@ -29,15 +30,16 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-3 column"></div>
-    <div class="col-md-6">
+    <div class="col-md-8 column"></div>
+    <div class="col-md-4" style="background: rgba(238, 238, 238, 0.8);">
+      <h3><s:actionmessage /></h3>
       <form class="form-signin" role="form" method="post"
             action="login.action">
         <h2 class="form-signin-heading">用户登陆</h2>
         <input type="text" class="form-control" placeholder="请输入用户名"
                required autofocus name="user.account">
         <input type="password"  class="form-control" placeholder="请输入密码" name="user.password"
-                                                         required>
+               required>
         <!--首次输入密码错误，要求输入验证码 --
           <div class="row">
             <div class="col-md-6 column">
@@ -61,7 +63,6 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
       </form>
     </div>
-    <div class="col-md-3 column"></div>
   </div>
 </div>
 <!-- /container -->

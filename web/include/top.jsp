@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: jamin
@@ -20,7 +21,9 @@
 
   <!-- 控制超链接字体的颜色 -->
   <style type="text/css">
-    <!--
+    html,body{
+      background:  #7bc1ee;
+    }
     a:link {
       text-decoration: none;
     }
@@ -36,10 +39,9 @@
     a:active {
       text-decoration: none;
     }
-    -->
   </style>
 </head>
-<body>
+<body >
 <nav class="navbar" role="navigation"> </nav>
 <div class="container">
   <div class="row clearfix">
@@ -55,7 +57,7 @@
             <span class="icon-bar"></span>
           </button>
           <a href="/index.jsp">
-            <img src="/resources/img/maiba2.png" width="160px"></a>
+            <img src="/resources/img/head/maiba2.png" width="160px"></a>
         </div>
 
         <div class="collapse navbar-collapse"
@@ -68,29 +70,34 @@
             </div>
             <button type="submit" class="btn btn-default">搜索</button>
           </form>
-          <!--未登陆状态 -->
+          <!-- 未登陆状态 -->
+          <s:if test="%{#session.logonUser == null }">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/login.jsp">登录</a></li>
             <li><a href="/register.jsp">注册</a></li>
             <li>&nbsp;&nbsp;&nbsp;</li>
           </ul>
+          </s:if>
           <!-- 未登陆状态结束 -->
-          <!-- 已登陆状态 --
+
+          <!-- 已登陆状态 -->
+          <s:if test="%{#session.logonUser != null }">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">注销</a></li>
+              <li><a href="logOut.action">注销</a></li>
               <li>&nbsp;&nbsp;&nbsp;</li>
             </ul>
-          <!--显示用户名 --
+          <!--显示用户名 -->
           <ul class="nav navbar-nav navbar-right">
-            <li><a
-                    href="${webPath}/user/logon/UserDetail.jsp?account=${logonUser.userId}">${logonUser.userName}</a></li>
+            <li><a href="showUserDetail.action?id=<s:property value='#session.logonUser.id'/> " >
+              <s:property value="#session.logonUser.userName" /></a></li>
           </ul>
-          <!-- 显示用户头像 --
-            <a
-                    href="${webPath}/user/logon/UserDetail.jsp?account=${logonUser.userId}"><ul class="nav navbar-nav navbar-right">
-              <li><img alt="140x140" src="${webPath}/img/${logonUser.head}"
+          <!-- 显示用户头像 -->
+            <a href="showUserDetail.action?id=<s:property value='#session.logonUser.id'/> ">
+              <ul class="nav navbar-nav navbar-right">
+              <li><img alt="140x140" src="/resources/img/head/<s:property value='#session.logonUser.head'/> "
                        class="img-circle" width="45px" />&nbsp;&nbsp;</li>
             </ul></a>
+          </s:if>
           <!-- 已登陆状态结束 -->
         </div>
       </nav>

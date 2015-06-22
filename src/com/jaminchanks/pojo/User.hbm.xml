@@ -29,5 +29,8 @@
         <property name="identity">
             <column name="identity" sql-type="int"/>
         </property>
+        <property name="head">
+            <column name="head" sql-type="varchar" length="160"/>
+        </property>
     </class>
 </hibernate-mapping>

@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx
+	   http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	   http://www.springframework.org/schema/aop
+	   http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
        <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
               <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-              <property name="url" value="jdbc:mysql://localhost:3306/testdb2" />
+              <property name="url" value="jdbc:mysql://localhost:3306/testdb2?useUnicode=true&amp;characterEncoding=utf8" />
               <property name="username" value="root" />
               <property name="password" value="sql0122" />
        </bean>
@@ -18,22 +25,72 @@
                             </prop>
                             <prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/testdb2</prop>
                             <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+                            <!--是否根据Hiberante映射创建数据表 -->
+                            <prop key="hibernate.hbm2ddl.auto">update</prop>
+                            <prop key="hibernate.show_sql">true</prop>
+                            <prop key="hibernate.format_sql">true</prop>
                      </props>
               </property>
               <property name="mappingResources">
                      <list>
                             <value>com/jaminchanks/pojo/User.hbm.xml</value>
+                            <value>com/jaminchanks/pojo/Video.hbm.xml</value>
+                            <value>com/jaminchanks/pojo/Comment.hbm.xml</value>
                      </list>
               </property>
 
        </bean>
 
+       <!-- 配置Dao和service-->
+       <!-- 用户 -->
        <bean id="userDao" class="com.jaminchanks.dao.impl.UserDaoImpl" >
               <property name="sessionFactory" ref="sessionFactory" />
        </bean>
 
        <bean id="userService" class="com.jaminchanks.service.impl.UserServiceImpl"
-               abstract="false" lazy-init="default" autowire="default" >
+             abstract="false" lazy-init="default" autowire="default" >
               <property name="userDao" ref="userDao"></property>
        </bean>
+
+       <!-- 视频 -->
+       <bean id="videoDao" class="com.jaminchanks.dao.impl.VideoDaoImpl" >
+              <property name="sessionFactory" ref="sessionFactory" />
+       </bean>
+       <bean id="videoService" class="com.jaminchanks.service.impl.VideoServiceImpl"
+             abstract="false" lazy-init="default" autowire="default">
+              <property name="videoDao" ref="videoDao"/>
+       </bean>
+
+       <!-- 评论 -->
+       <bean id="commentDao" class="com.jaminchanks.dao.impl.CommentDaoImpl">
+              <property name="sessionFactory" ref="sessionFactory" />
+       </bean>
+
+       <bean id="commentService" class="com.jaminchanks.service.impl.CommentServiceImpl">
+              <property name="commentDao" ref="commentDao" />
+       </bean>
+
+       <!-- 配置事务管理器 hibernate、jpa都是类似的这样配 -->
+       <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+              <property name="dataSource" ref="dataSource"></property>
+       </bean>
+
+       <!-- 配置事务增强处理Bean,指定事务管理器 -->
+       <tx:advice id="txAdvice"
+                  transaction-manager="transactionManager">
+              <!-- 用于配置详细的事务定义 -->
+              <tx:attributes>
+                     <!-- 所有以'get'开头的方法是read-only的 -->
+                     <tx:method name="get*" read-only="true"/>
+                     <!-- 其他方法使用默认的事务设置，指定超时时长为5秒 -->
+                     <tx:method name="*" isolation="DEFAULT"
+                                propagation="REQUIRED" timeout="5"/>
+              </tx:attributes>
+       </tx:advice>
+
+       <!-- 配置事务的切点,并把事务切点和事务属性不关联起来 -->
+       <aop:config>
+              <aop:pointcut expression="execution(* com.jaminchanks.service.impl.*Impl.*(..))" id="txPointCut"/>
+              <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>
+       </aop:config>
 </beans>

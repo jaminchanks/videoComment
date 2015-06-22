@@ -9,16 +9,19 @@ import java.util.List;
  * Created by jamin on 6/5/15.
  */
 public interface UserService {
-    Serializable addUser(User user);
+    //增
+    int addUser(User user);
 
+    //删
     void deleteUser(int id);
 
+    //查找所有
     List<User> getAllUsers();
 
-    List<User> findUser(String hql, String name, String pass);
+    //根据hql语句查询用户
+    List<User> findUsers(String hql, Object... params);
 
-    User findOne(String hql, int id);
-
+    //改
     void updateUser(User user);
 
 }
