@@ -9,12 +9,21 @@ public class Video {
     private int videoId;
     private Date upTime;
     private int likeNumbers;
-    private int commentsId;
     private String videoSrc;
     private String videoWrap;
     private String catalog;
     private String videoName;
     private User user;
+    private int watchNumbers;
+
+    public int getWatchNumbers() {
+        return watchNumbers;
+    }
+
+    public void setWatchNumbers(int watchNumbers) {
+        this.watchNumbers = watchNumbers;
+    }
+
 
     public User getUser() {
         return user;
@@ -49,13 +58,6 @@ public class Video {
         this.likeNumbers = likeNumbers;
     }
 
-    public int getCommentsId() {
-        return commentsId;
-    }
-
-    public void setCommentsId(int commentsId) {
-        this.commentsId = commentsId;
-    }
 
     public String getVideoSrc() {
         return videoSrc;
@@ -98,7 +100,6 @@ public class Video {
 
         if (videoId != video.videoId) return false;
         if (likeNumbers != video.likeNumbers) return false;
-        if (commentsId != video.commentsId) return false;
         if (upTime != null ? !upTime.equals(video.upTime) : video.upTime != null) return false;
         if (videoSrc != null ? !videoSrc.equals(video.videoSrc) : video.videoSrc != null) return false;
         if (videoWrap != null ? !videoWrap.equals(video.videoWrap) : video.videoWrap != null) return false;
@@ -113,7 +114,6 @@ public class Video {
         int result = videoId;
         result = 31 * result + (upTime != null ? upTime.hashCode() : 0);
         result = 31 * result + likeNumbers;
-        result = 31 * result + commentsId;
         result = 31 * result + (videoSrc != null ? videoSrc.hashCode() : 0);
         result = 31 * result + (videoWrap != null ? videoWrap.hashCode() : 0);
         result = 31 * result + (catalog != null ? catalog.hashCode() : 0);

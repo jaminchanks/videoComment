@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+  <title></title>
 </head>
 <body>
 <s:include value="/include/top.jsp" />
@@ -19,34 +19,11 @@
     <s:include value="user-left.jsp" />
     <!-- -->
     <div class="col-md-9 column"  style="background: #ffffff;">
-      <br/>
-      <ul class="nav nav-tabs">
-        <li class="active"><a href="#">观看记录</a></li>
-        <li><a href="#">我的收藏</a></li>
-        <li><a href="#">发布的评论</a></li>
-      </ul>
-      <h3>这里放置你看过的电影的缩略图</h3>
+      <iframe name="content" id="content"
+              src="showVideosOfUser.action?id=${user.id}"
+              width="100%" onload="this.height=content.document.body.scrollHeight"
+              frameborder="0"></iframe>
 
-      <!-- 分页处理 -->
-      <div align="right">
-        <ul class="pagination">
-          <li>
-            <a href="#">Prev</a>
-          </li>
-          <li>
-            <a href="#">1</a>
-          </li>
-          <li>
-            <a href="#">2</a>
-          </li>
-          <li>
-            <a href="#">3</a>
-          </li>
-          <li>
-            <a href="#">Next</a>
-          </li>
-        </ul>
-      </div>
     </div>
   </div>
 </div>

@@ -36,29 +36,37 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public List<Video> findVideoByCatalog(String catalog) {
-        String hql = "from Video where catalog=? order by upTime desc";
-        return videoDao.find(hql, catalog);
+    public List<Video> findVideoByCatalogOrder(String catalog, String order) {
+        return videoDao.findVideoByCatalogOrder(catalog, order);
     }
 
     //只显示4条数据
     @Override
     public List<Video> findVideoByCatalog4(String catalog) {
-        List<Video> videos = findVideoByCatalog(catalog);
-        return videos.subList(0, videos.size()>4?4: videos.size());
+        List<Video> videos = findVideoByCatalogOrder(catalog, "upTime");
+        return videos.subList(0, videos.size() > 4 ? 4 : videos.size());
     }
 
     @Override
     public Video findVideoById(int id){
-        String hql = "from Video where videoId=?";
-        List<Video> videos = videoDao.find(hql, id);
-        if (videos != null && videos.size() != 0)
-            return videos.get(0);
-        else return null;
+       return videoDao.findVideoById(id);
     }
 
     @Override
-    public void UpdateVideo(Video video) {
-
+    public void updateVideo(Video video) {
+        videoDao.update(video);
     }
+
+
+    @Override
+    public List<Video> findVideosByUserId(int userId){
+        return videoDao.findVideosByUserId(userId);
+    }
+
+
+    @Override
+    public List<Video> findVideosByName(String videoName) {
+        return videoDao.findVideosByName(videoName);
+    }
+
 }

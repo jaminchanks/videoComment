@@ -17,8 +17,8 @@ public interface VideoService {
     //查
     List<Video> findVideo(String hql, Object... params);
 
-    //按分类查找视频,显示全部
-    List<Video> findVideoByCatalog(String catalog);
+    //按分类有序查找视频,显示全部
+    List<Video> findVideoByCatalogOrder(String catalog, String order);
 
     //只显示4条数据，用于首页
     //按分类查找视频
@@ -27,6 +27,14 @@ public interface VideoService {
     //按id查找视频
     Video findVideoById(int id);
 
+    //按用户id查找视频
+    List<Video> findVideosByUserId(int userId);
+
+    //根据视频的名字来查找视频
+    List<Video> findVideosByName(String videoName);
+
     //改
-    void UpdateVideo(Video video);
+    void updateVideo(Video video);
+
+
 }

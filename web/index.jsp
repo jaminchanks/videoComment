@@ -9,10 +9,60 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
-    <title></title>
+  <title></title>
 </head>
 <body>
-<!-- 跳转到action，获取最新的视频列表-->
-<jsp:forward page="showVideosByCatalog.action" />
+<s:action name="showVideosByCatalog4" />
+<s:include value="/include/top.jsp" />
+<div class="container">
+  <div class="row clearfix">
+    <div class="col-md-1 column">
+    </div>
+    <div class="col-md-10 column" style="background: #ffffff;">
+      <!-- 动漫分区 -->
+      <h2>
+        <a style="color: rgba(33, 33, 33, 0.94)" href="showAllVideosOfCatalog.action?catalog=comic"> 动漫社区 </a>
+      </h2>
+      <hr size=3 />
+      <div class="row">
+        <s:iterator var="videoOfComic" value="#session.videoOfComic" >
+          <a href="videoToBeShow.action?videoId=<s:property value='%{#videoOfComic.videoId}'/> ">
+            <div class="col-md-3">
+              <div class="thumbnail">
+                <img alt="300x200" src="/resources/img/wrap/<s:property value='%{#videoOfComic.videoWrap}' />"
+                     style="width: 210px; height: 100px; "/>
+                <h4 align="center"><s:property value='%{#videoOfComic.videoName}' /> </h4>
+              </div>
+            </div>
+          </a>
+        </s:iterator>
+      </div>
+
+      <hr />
+      <!-- IT技术分区-->
+      <h2>
+        IT天空
+      </h2>
+      <hr size=3 />
+      <div class="row">
+        <s:iterator var="videoOfIT" value="#session.videoOfIT" >
+          <a href="videoToBeShow.action?videoId=<s:property value='%{#videoOfIT.videoId}'/> ">
+            <div class="col-md-3">
+              <div class="thumbnail">
+                <img alt="300x200" src="/resources/img/wrap/<s:property value='%{#videoOfIT.videoWrap}' />"
+                     width="200px"/>
+                <h4 align="center"><s:property value='%{#videoOfIT.videoName}' /> </h4>
+              </div>
+            </div>
+          </a>
+        </s:iterator>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-md-1 column">
+  </div>
+</div>
+<s:include value="/include/bottom.jsp" />
 </body>
 </html>

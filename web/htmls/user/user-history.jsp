@@ -18,11 +18,13 @@
   <s:include value="user-left.jsp" />
     <div class="col-md-9 column"  style="background: #ffffff;">
       <ul class="nav nav-tabs">
-        <li><a href="#">观看记录</a></li>
-        <li><a href="#">我的收藏</a></li>
-        <li class="active"><a href="#">发布的评论</a></li>
+        <li><a href="/htmls/user/user-up.jsp">上传的视频</a></li>
+        <!--
+        <li class="active"><a href="/htmls/user/user-history.jsp">观看记录</a></li>
+        <li><a href="/htmls/user/user-collect.jsp">收藏的视频</a></li>
+        -->
       </ul>
-      <h3>这里放置你之前对电影的评论</h3>
+      <h3>这里放置你的浏览历史</h3>
 
       <!-- 分页处理 -->
       <div align="right">

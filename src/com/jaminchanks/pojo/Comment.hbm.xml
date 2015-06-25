@@ -8,17 +8,26 @@
         <id name="commentId">
             <column name="comment_id" sql-type="int" not-null="true"/>
         </id>
+
         <many-to-one name="user" class="com.jaminchanks.pojo.User" lazy="false">
             <column name="user_id" not-null="true"/>
         </many-to-one>
+
         <property name="content">
-            <column name="content" sql-type="varchar" length="1024" not-null="true" />
+            <column name="content" sql-type="varchar" length="1024" not-null="true"/>
         </property>
         <property name="commentTo">
             <column name="comment_to" sql-type="int"/>
         </property>
         <property name="videoId">
             <column name="video_id" sql-type="int" not-null="true"/>
+        </property>
+        <property name="commentTime">
+            <column name="comment_time" sql-type="timestamp"/>
+        </property>
+
+        <property name="isBaned">
+            <column name="isBaned" sql-type="int" />
         </property>
     </class>
 </hibernate-mapping>

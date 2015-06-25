@@ -27,7 +27,7 @@
         <div style="font-size: small;">  简介：<s:property value="#session.logonUser.marks"/></div>
       </div>
 
-      <a href="#" class="list-group-item" id="myUser"><h4>用户主页</h4></a>
+      <a href="/htmls/user/user-main.jsp" class="list-group-item" id="myUser"><h4>用户主页</h4></a>
       <a href="#" class="list-group-item" id="videoM"><h4>视频管理</h4></a>
       <s:if test="%{#session.logonUser.identity == 99}">
         <a href="#" class="list-group-item" id="userM"><h4>用户管理(super)</h4></a>
@@ -44,6 +44,7 @@
         <div class="col-md-2 column"></div>
         <div class="col-md-8 column">
           <form action="updateUser.action" method="POST">
+            <s:hidden name="user.head" value="%{#session.logonUser.head}" />
             <s:hidden name="user.id" value="%{#session.logonUser.id}" />
             <s:hidden name="user.account" value="%{#session.logonUser.account}" />
             <s:hidden name="user.identity" value="%{#session.logonUser.identity}" />
@@ -91,8 +92,15 @@
                            name="user.email" value="<s:property value='#session.logonUser.email'/>"></td>
               </tr>
               <tr>
+                <td>备注</td>
+                <td>
+                  <input type="text" class="form-control" required
+                         name="user.marks" value="<s:property value='#session.logonUser.marks'/>">
+                </td>
+              </tr>
+              <tr>
                 <td colspan=2 align="center"><button type="submit"
-                                                     class="btn btn-default">确定</button>&nbsp;&nbsp;&nbsp;
+                                                     class="btn btn-primary">确定</button>&nbsp;&nbsp;&nbsp;
                   <button type="reset" class="btn btn-default">取消</button></td>
               </tr>
 

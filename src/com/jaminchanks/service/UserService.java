@@ -18,6 +18,12 @@ public interface UserService {
     //查找所有
     List<User> getAllUsers();
 
+    //根据账户和密码查询用户
+    User findUserByAccountNPassword(String account, String password);
+
+    //根据id查询用户
+    User findUserById(int id);
+
     //根据hql语句查询用户
     List<User> findUsers(String hql, Object... params);
 

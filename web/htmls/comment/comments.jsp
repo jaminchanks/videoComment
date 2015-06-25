@@ -44,20 +44,39 @@
 
       <form action="addComment.action" method="post">
         <!-- 发布评论 -->
-        <input type="text" class="form-control" name="content">
+        <input type="text" class="form-control" name="content" required>
         <div align="right">
           <button type="submit" class="btn btn-primary">发布</button>
         </div>
       </form>
       <s:iterator value="commentsWatching" var="comment">
-        <a onclick="javascript:window.parent.location.href='showUserDetail.action?id=${comment.user.id}' ">
-          <h3>${comment.user.userName}</h3>
-        </a>
-        <h5>${comment.content}</h5>
-        <div align="right">
-          <s:if test="%{#comment.user.id == #session.logonUser.id}"><a href=""> 删除 </a> </s:if>
+        <h3>
+          <!-- 如果是未登陆状态 -->
+          <s:if test="%{#session.logonUser == null}">
+          <a href="${pageContext.request.contextPath}/result/pleaseLogin.jsp">
+          </s:if>
+          <!-- 如果是已登陆状态 -->
+          <s:if test="%{#session.logonUser != null}">
+          <a onclick="javascript:window.parent.location.href='showUserDetail.action?id=${comment.user.id}' ">
+            </s:if>
+            <img src="/resources/img/head/${comment.user.head}" width="32px"/>
+              ${comment.user.userName}
 
-          <a href=""> 回复 </a></div>
+          </a>
+        </h3>
+        <s:if test="%{#comment.isBaned == 1}">
+          <pre style="font-size: medium; color: rgba(255, 0, 0, 0.91)">评论已被删除!</pre>
+        </s:if>
+        <s:else>
+          <pre style="font-size: medium;">${comment.content}</pre>
+        </s:else>
+        <div align="right">
+          <small>${comment.commentTime}</small>
+          <s:if test="%{#comment.user.id == #session.logonUser.id || #session.logonUser.identity == 99}">
+            <a href="deleteComment.action?commentId=${comment.commentId}"> 删除 </a>&nbsp;
+          </s:if>
+
+        </div>
         <hr/>
       </s:iterator>
 
@@ -72,7 +91,7 @@
           </s:if>
         </ul>
         <form action="showVideoComment.action" >
-          <h4> 共${maxPageSize}页 第<input type="text" name="pageNo" size="2">页
+          <h4> 第${pageNo}页/共${maxPageSize}页 第<input type="text" name="pageNo" size="2">页
             <input type="submit" class="btn btn-default" value="跳转">
           </h4>
         </form>

@@ -45,11 +45,11 @@ public class UserAction extends ActionSupport {
     }
 
     public String login() {
-        List<User> userList = getUserService().findUsers("from User where account=? and password=?",
+        //登陆成功！ 找到用户
+        user = getUserService().findUserByAccountNPassword(
                 user.getAccount(), user.getPassword());
-        if ( userList != null && userList.size() != 0) {
-            User user1 = userList.get(0);
-            putInSession("logonUser", user1);
+        if(user != null){
+            putInSession("logonUser", user);
             return SUCCESS;
         } else {
             addActionMessage("密码或用户名错误！");
@@ -72,11 +72,9 @@ public class UserAction extends ActionSupport {
 
     //从页面传过来的参数为用户的id,传出去的参数为request范围的user
     public String showUserDetail() {
-        List<User> userList = getUserService().findUsers("from User where id=?",
-                id);
-        if ( userList != null && userList.size() != 0) {
-            User user1 = userList.get(0);
-            putInSession("userToBeShow", user1);
+        //登陆成功！ 找到用户
+        user = getUserService().findUserById(id);
+        if(user != null){
             return SUCCESS;
         } else {
             return ERROR;

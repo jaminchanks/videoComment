@@ -64,9 +64,9 @@
              id="bs-example-navbar-collapse-1">
           <!-- -------------------------注意这里action的跳转地址------------------------------------- -->
           <!-- 搜索功能，未完成-->
-          <form class="navbar-form navbar-left" role="search" method="post" action="#">
+          <form class="navbar-form navbar-left" role="search" method="post" action="showResultOfVideos.action">
             <div class="form-group">
-              <input name="searchVar" type="text" class="form-control" placeholder="搜电影，搜用户"/>
+              <input name="video.videoName" type="text" class="form-control" placeholder="搜索视频"/>
             </div>
             <button type="submit" class="btn btn-default">搜索</button>
           </form>

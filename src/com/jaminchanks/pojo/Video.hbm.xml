@@ -19,8 +19,8 @@
         <property name="likeNumbers">
             <column name="like_numbers" sql-type="int" not-null="true"/>
         </property>
-        <property name="commentsId">
-            <column name="comments_id" sql-type="int" not-null="true"/>
+        <property name="watchNumbers">
+            <column name="watch_numbers" sql-type="int" not-null="true"/>
         </property>
         <property name="videoSrc">
             <column name="video_src" sql-type="varchar" length="160"/>

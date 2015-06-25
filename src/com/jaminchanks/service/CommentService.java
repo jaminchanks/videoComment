@@ -17,7 +17,9 @@ public interface CommentService {
     //显示页数
     int getPagesOfCommentsByVideo(int videoId, int pageSize);
 
-    //删
+    //删，伪删除
     void deleteComment(Comment comment);
 
+    //按id查询评论
+    Comment findCommentById(int id);
 }

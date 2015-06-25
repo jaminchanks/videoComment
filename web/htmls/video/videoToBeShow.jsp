@@ -33,18 +33,30 @@
              data-setup='{"example_option":true}'>
         <source src="/resources/videos/${videoWatching.videoSrc} " type='video/mp4' />
       </video>
-      <div align="right" >
+
+
+      <div align="left" >
         <h4>
+          <s:if test="%{#session.logonUser != null }" >
           <a href="showUserDetail.action?id=${videoWatching.user.id}">
-           ${videoWatching.user.userName} </a>
-          上传于:${videoWatching.upTime}<br/>
+          </s:if>
+          <s:else>
+            <a href="showUserDetail.action?id=-1" target="content">
+          </s:else>
+            ${videoWatching.user.userName} </a>
+          上传于:${videoWatching.upTime}
         </h4>
-      </div><hr/>
+      </div>
+        <div align="right">
+            <small>播放次数:${videoWatching.watchNumbers}</small>
+          </div><br/>
+
+      <hr/>
       <h3>评论区</h3>
       <iframe name="content" id="content"
               src="showVideoComment.action?videoId=${videoWatching.videoId}"
               width="100%" onload="this.height=content.document.body.scrollHeight"
-              scrolling="no" frameborder="0">
+              frameborder="0">
       </iframe>
     </div>
   </div>

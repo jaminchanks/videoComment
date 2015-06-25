@@ -6,9 +6,10 @@ import com.jaminchanks.service.CommentService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by jamin on 6/20/15.
@@ -96,7 +97,7 @@ public class CommentAction extends ActionSupport {
         List<Comment> comments = getCommentService().findCommentsByVideo(videoId, pageNo, pageSize);
         if (comments != null && comments.size() != 0) {
             commentsWatching = (ArrayList<Comment>) comments;
-            System.out.println("xxxxx==" + commentsWatching.get(0).getUser().getUserName());
+            System.out.println("userName[0]==" + commentsWatching.get(0).getUser().getUserName());
             //告知最后一页是多少
             maxPageSize = getCommentService().getPagesOfCommentsByVideo(videoId, pageSize);
             return SUCCESS;
@@ -110,19 +111,24 @@ public class CommentAction extends ActionSupport {
         //需要内容，用户id,视频id
         Comment comment1 = new Comment();
         comment1.setVideoId(videoId);
+
+        comment1.setCommentTime(new Timestamp(System.currentTimeMillis()));
         //获取正在登陆的用户
         User user1= (User)ActionContext.getContext().getSession().get("logonUser");
         if (user1 == null) {
-            return ERROR;
+            return LOGIN;
         }
         comment1.setUser(user1);
         comment1.setContent(content);
-        System.out.println("xxxxx" + user1.getId() + "//" + videoId + "//" + comment1.getContent());
+        System.out.println("userId&& content" + user1.getId() + "//" + videoId + "//" + comment1.getContent());
         getCommentService().addComment(comment1);
         return SUCCESS;
     }
 
-
-
-    //
+    //删除评论,将其内容设置为“评论已被删除”
+    public String deleteComment(){
+        Comment comment1 = getCommentService().findCommentById(commentId);
+        getCommentService().deleteComment(comment1);
+        return SUCCESS;
+    }
 }

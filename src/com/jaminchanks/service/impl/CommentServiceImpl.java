@@ -23,7 +23,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public int addComment(Comment comment) {
-        return (Integer)commentDao.save(comment);
+        return (Integer)commentDao.addComment(comment);
     }
 
     @Override
@@ -35,15 +35,16 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<Comment> findCommentsByVideo(int videoId, int pageNo, int pageSize){
-        String hql = "from Comment where videoId=?";
-        return commentDao.findByPage(hql, pageNo, pageSize, videoId);
+        return commentDao.findCommentsByVideo(videoId, pageNo, pageSize);
     }
 
     @Override
     public int getPagesOfCommentsByVideo(int videoId, int pageSize) {
-        String hql = "from Comment where videoId=?";
-        ArrayList<Comment> comments = (ArrayList<Comment>) commentDao.find(hql, videoId);
-        return comments.size()/pageSize;
+        return commentDao.getPagesOfCommentsByVideo(videoId, pageSize);
     }
 
+    @Override
+    public Comment findCommentById(int id) {
+        return commentDao.findCommentById(id);
+    }
 }

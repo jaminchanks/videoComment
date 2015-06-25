@@ -21,6 +21,7 @@
   </div>
 </h3>
 <div align="center"> 登陆成功！正在返回登陆前页面... </div>
+<% %>
 <s:include value="/include/bottom.jsp" />
 </body>
 </html>
