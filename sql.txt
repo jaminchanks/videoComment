@@ -1,0 +1,47 @@
+#user:
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `account` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `userName` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `birthday` date NOT NULL,
+  `email` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `marks` varchar(160) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `identity` int(11) DEFAULT '0',
+  `head` varchar(160) COLLATE utf8_unicode_ci DEFAULT 'head.png',
+  `isBaned` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+
+
+#video:
+CREATE TABLE `video` (
+  `video_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `up_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `like_numbers` int(11) DEFAULT '0',
+  `video_src` varchar(160) COLLATE utf8_unicode_ci NOT NULL,
+  `video_wrap` varchar(160) COLLATE utf8_unicode_ci DEFAULT 'head.jpg',
+  `catalog` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `video_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `watch_numbers` int(11) DEFAULT '0',
+  PRIMARY KEY (`video_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `video_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+
+#video:
+CREATE TABLE `comment` (
+  `comment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `content` varchar(1024) COLLATE utf8_unicode_ci NOT NULL,
+  `comment_to` int(11) DEFAULT NULL,
+  `video_id` int(11) NOT NULL,
+  `comment_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `isBaned` int(11) DEFAULT '0',
+  PRIMARY KEY (`comment_id`),
+  KEY `user_id` (`user_id`),
+  KEY `video_id` (`video_id`),
+  CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`video_id`) REFERENCES `video` (`video_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
