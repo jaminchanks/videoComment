@@ -3,9 +3,7 @@ package com.jaminchanks.service.impl;
 import com.jaminchanks.dao.UserDao;
 import com.jaminchanks.pojo.User;
 import com.jaminchanks.service.UserService;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -58,4 +56,22 @@ public class UserServiceImpl implements UserService {
     public User findUserById(int id) {
         return userDao.findUserById(id);
     }
+
+    @Override
+    public List<User> findUsersByUserName(String userName) {
+        return userDao.findUsersByUserName(userName);
+    }
+
+    @Override
+    public void banUser(User user) {
+        user.setIsBaned(1);
+        userDao.update(user);
+    }
+
+    @Override
+    public void activeUser(User user) {
+        user.setIsBaned(0);
+        userDao.update(user);
+    }
+
 }

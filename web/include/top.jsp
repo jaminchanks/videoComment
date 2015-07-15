@@ -57,16 +57,15 @@
             <span class="icon-bar"></span>
           </button>
           <a href="/index.jsp">
-            <img src="/resources/img/head/maiba2.png" width="160px"></a>
+            <img src="/resources/img/head/videoPub.png" width="160px"></a>
         </div>
 
         <div class="collapse navbar-collapse"
              id="bs-example-navbar-collapse-1">
           <!-- -------------------------注意这里action的跳转地址------------------------------------- -->
-          <!-- 搜索功能，未完成-->
-          <form class="navbar-form navbar-left" role="search" method="post" action="showResultOfVideos.action">
+          <form class="navbar-form navbar-left" role="search" method="post" action="searchVideosByName.action">
             <div class="form-group">
-              <input name="video.videoName" type="text" class="form-control" placeholder="搜索视频"/>
+              <input name="whatToSearch" type="text" class="form-control" placeholder="搜索视频、用户" required/>
             </div>
             <button type="submit" class="btn btn-default">搜索</button>
           </form>
@@ -95,10 +94,11 @@
             <a href="showUserDetail.action?id=<s:property value='#session.logonUser.id'/> ">
               <ul class="nav navbar-nav navbar-right">
               <li><img alt="140x140" src="/resources/img/head/<s:property value='#session.logonUser.head'/> "
-                       class="img-circle" width="45px" />&nbsp;&nbsp;</li>
+                       class="img-circle" width="45px" height="45px"/>&nbsp;&nbsp;</li>
             </ul></a>
           </s:if>
           <!-- 已登陆状态结束 -->
+
         </div>
       </nav>
     </div>

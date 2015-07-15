@@ -51,15 +51,10 @@
       </form>
       <s:iterator value="commentsWatching" var="comment">
         <h3>
-          <!-- 如果是未登陆状态 -->
-          <s:if test="%{#session.logonUser == null}">
-          <a href="${pageContext.request.contextPath}/result/pleaseLogin.jsp">
-          </s:if>
-          <!-- 如果是已登陆状态 -->
-          <s:if test="%{#session.logonUser != null}">
-          <a onclick="javascript:window.parent.location.href='showUserDetail.action?id=${comment.user.id}' ">
-            </s:if>
-            <img src="/resources/img/head/${comment.user.head}" width="32px"/>
+
+          <a href="" onclick="javascript:window.parent.location.href='showUserDetail.action?id=${comment.user.id}' ">
+
+            <img src="/resources/img/head/${comment.user.head}" width="32px" height="32px"/>
               ${comment.user.userName}
 
           </a>

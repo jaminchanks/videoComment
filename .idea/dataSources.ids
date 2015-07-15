@@ -29,6 +29,7 @@
       <column name="marks" sqlType="VARCHAR" precision="160" scale="0" nullable="true" jdbcType="12"/>
       <column name="identity" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
       <column name="head" sqlType="VARCHAR" precision="160" scale="0" nullable="true" jdbcType="12" def="J2hlYWQucG5nJw=="/>
+      <column name="isBaned" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
       <primary-key name="PRIMARY" columns="id"/>
       <exported-key name="comment_ibfk_1" table="comment" schema="" catalog="testdb2" columns="user_id"/>
       <exported-key name="video_ibfk_1" table="video" schema="" catalog="testdb2" columns="user_id"/>
@@ -36,13 +37,13 @@
     <table name="video" schema="" catalog="testdb2" type="TABLE">
       <column name="video_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="up_time" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
-      <column name="like_numbers" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="video_src" sqlType="VARCHAR" precision="160" scale="0" nullable="true" jdbcType="12"/>
+      <column name="up_time" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="like_numbers" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="video_src" sqlType="VARCHAR" precision="160" scale="0" nullable="false" jdbcType="12"/>
       <column name="video_wrap" sqlType="VARCHAR" precision="160" scale="0" nullable="true" jdbcType="12" def="J2hlYWQuanBnJw=="/>
-      <column name="catalog" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="J2Z1bic="/>
+      <column name="catalog" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
       <column name="video_name" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
-      <column name="watch_numbers" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="watch_numbers" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
       <primary-key name="PRIMARY" columns="video_id"/>
       <foreign-key name="video_ibfk_1" columns="user_id" ref-table="user" ref-schema="" ref-catalog="testdb2" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="comment_ibfk_2" table="comment" schema="" catalog="testdb2" columns="video_id"/>

@@ -1,13 +1,14 @@
 package com.jaminchanks.pojo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by jamin on 6/16/15.
  */
 public class Video {
     private int videoId;
-    private Date upTime;
+    private Timestamp upTime;
     private int likeNumbers;
     private String videoSrc;
     private String videoWrap;
@@ -42,11 +43,11 @@ public class Video {
         this.videoId = videoId;
     }
 
-    public Date getUpTime() {
+    public Timestamp getUpTime() {
         return upTime;
     }
 
-    public void setUpTime(Date upTime) {
+    public void setUpTime(Timestamp upTime) {
         this.upTime = upTime;
     }
 

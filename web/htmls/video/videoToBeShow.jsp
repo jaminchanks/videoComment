@@ -37,12 +37,7 @@
 
       <div align="left" >
         <h4>
-          <s:if test="%{#session.logonUser != null }" >
           <a href="showUserDetail.action?id=${videoWatching.user.id}">
-          </s:if>
-          <s:else>
-            <a href="showUserDetail.action?id=-1" target="content">
-          </s:else>
             ${videoWatching.user.userName} </a>
           上传于:${videoWatching.upTime}
         </h4>

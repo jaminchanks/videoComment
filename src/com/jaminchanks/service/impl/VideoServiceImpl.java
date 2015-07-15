@@ -22,7 +22,7 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public int addVideo(Video video) {
-        return 0;
+        return (Integer)videoDao.save(video);
     }
 
     @Override

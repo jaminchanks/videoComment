@@ -16,6 +16,15 @@ public class User {
     private String marks;
     private Integer identity = 0;
     private String head = "head.jpg";
+    private Integer isBaned;
+
+    public Integer getIsBaned() {
+        return isBaned;
+    }
+
+    public void setIsBaned(Integer isBanded) {
+        this.isBaned = isBanded;
+    }
 
     public int getId() {
         return id;

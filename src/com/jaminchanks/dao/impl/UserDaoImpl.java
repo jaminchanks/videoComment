@@ -15,7 +15,8 @@ public class UserDaoImpl extends BaseDaoHibernate4Impl<User> implements UserDao 
     public int addUser(User user){
         //user的默认权限和头像在这里设置
         user.setIdentity(0);
-        user.setHead("head.jpg");
+        if (user.getHead() == null)
+            user.setHead("head.jpg");
         //查询有无相同的账户名
         List<User> userList = find("from User where account=?", user.getAccount());
         if (userList != null && userList.size() != 0) {
@@ -46,4 +47,14 @@ public class UserDaoImpl extends BaseDaoHibernate4Impl<User> implements UserDao 
         } else
             return null;
     }
+
+
+    @Override
+    public List<User> findUsersByUserName(String userName) {
+        userName = "%" + userName + "%";
+        String hql = "from User where userName like ?";
+        return find(hql, userName);
+    }
+
+
 }

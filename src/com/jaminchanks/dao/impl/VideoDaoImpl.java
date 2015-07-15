@@ -4,6 +4,8 @@ import com.jaminchanks.common.impl.BaseDaoHibernate4Impl;
 import com.jaminchanks.dao.VideoDao;
 import com.jaminchanks.pojo.Video;
 
+import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -37,6 +39,14 @@ public class VideoDaoImpl extends BaseDaoHibernate4Impl<Video> implements VideoD
         videoName = "%" + videoName + "%";
         String hql = "from Video where videoName like ?";
         return find(hql, videoName);
+    }
+
+    @Override
+    public Serializable addVideo(Video video){
+        video.setUpTime(new Timestamp(System.currentTimeMillis()));
+        video.setWatchNumbers(0);
+        video.setLikeNumbers(0);
+        return save(video);
     }
 
 }

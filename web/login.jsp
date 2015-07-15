@@ -17,16 +17,17 @@
 <body style="padding-top: 40px; padding-bottom: 40px;
  background: url(/resources/img/chuyin.jpg) no-repeat; background-size: 100% auto; ">
 <s:include value="/include/top.jsp" />
+
 <!--生成验证码 -->
-<script language="javascript" type="text/javascript">
-  function refreshImage() {
-    document.getElementById('checkcodeimgID').src = '${webPath}/user/servImgVal?'
-            + Math.random();
-  }
-  //function verifyCheck(){
-  //	document.getElementById('verifyCode').Text= "AjaxTest";
-  //	}
+<script type="text/javascript">
+  $(document).ready(function () {
+    //点击图片更换验证码
+    $("#Verify").click(function(){
+      $(this).attr("src","<% request.getContextPath();%>/SecurityCodeImageAction.action?timestamp="+new Date().getTime());
+    });
+  });
 </script>
+
 
 <div class="container">
   <div class="row">
@@ -40,17 +41,15 @@
                required autofocus name="user.account">
         <input type="password"  class="form-control" placeholder="请输入密码" name="user.password"
                required>
-        <!--首次输入密码错误，要求输入验证码 --
+        <!--首次输入密码错误，要求输入验证码 -->
           <div class="row">
             <div class="col-md-6 column">
-              <input type="text" class="form-control" name="verifyCode" id="verifyCode" required
+              <input type="text" class="form-control" name="verifyCode" id="VerifyCode" required
                      placeholder="请输入验证码" />
             </div>
             <div class="col-md-6 column">
-              &nbsp;&nbsp;<img id="checkcodeimgID" src="${webPath}/servImgVal"
-                               alt="请输入图中的数字" width="72px"> <a
-                    href="JavaScript:refreshImage()"><img
-                    src="${webPath}/img/refresh.png" width="27px"></a>
+              &nbsp;<img id="Verify" src="SecurityCodeImageAction.action"
+                               alt="请输入图中的数字" width="80px">
             </div>
           </div>
         <!-- 验证码部分结束 -->

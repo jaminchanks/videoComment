@@ -11,30 +11,13 @@
 <head>
   <title></title>
 </head>
-<body >
+<body style="background:  #7bc1ee;">
 <s:include value="/include/top.jsp" />
 <div class="container">
   <div class="row clearfix">
 
-    <div class="col-md-3 column">
-    <div class="list-group">
-      <div class="list-group-item">
-        <a href="#">
-          <img src=/resources/img/head/<s:property value='#session.logonUser.head'/> "
-               width="86px" class="img-rounded"/>
-        </a>
-        <div style="font-size: x-large;">  <s:property value="#session.logonUser.userName" /></div>
-        <div style="font-size: small;">  简介：<s:property value="#session.logonUser.marks"/></div>
-      </div>
-
-      <a href="/htmls/user/user-main.jsp" class="list-group-item" id="myUser"><h4>用户主页</h4></a>
-      <a href="#" class="list-group-item" id="videoM"><h4>视频管理</h4></a>
-      <s:if test="%{#session.logonUser.identity == 99}">
-        <a href="#" class="list-group-item" id="userM"><h4>用户管理(super)</h4></a>
-      </s:if>
-      <a href="#" class="list-group-item" id="friendM"><h4>好友管理</h4></a>
-      <a href="/htmls/user/myAccount.jsp" class="list-group-item" id="accountM"><h4>我的账号</h4></a>
-    </div>
+    <div class="col-md-3 column" >
+      <s:include value="logonUser-left.jsp" />
   </div>
 
 
@@ -43,7 +26,7 @@
       <div class="row">
         <div class="col-md-2 column"></div>
         <div class="col-md-8 column">
-          <form action="updateUser.action" method="POST">
+          <form action="updateUser.action" method="POST" enctype="multipart/form-data">
             <s:hidden name="user.head" value="%{#session.logonUser.head}" />
             <s:hidden name="user.id" value="%{#session.logonUser.id}" />
             <s:hidden name="user.account" value="%{#session.logonUser.account}" />
@@ -59,10 +42,11 @@
                 <!-- 头像 -->
                 <td width="32%">
                   <img name="user.head" src="/resources/img/head/<s:property value="#session.logonUser.head"/> "
-                       width="64px"></td>
-                <td><div class="form-group">
+                       width="64px" height="64px"></td>
+                <td>
+                  <div class="form-group">
                   <label for="exampleInputFile">选择头像</label>
-                  <input type="file" name="user.head" value="<s:property value="#session.logonUser.head"/>" id="exampleInputFile" />
+                  <input type="file" name="file" value="<s:property value="#session.logonUser.head"/>" id="exampleInputFile" />
                 </div></td>
               </tr>
               <tr>

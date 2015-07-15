@@ -5,6 +5,8 @@ import com.jaminchanks.service.VideoService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +23,16 @@ public class VideoAction extends ActionSupport {
     private String catalog;
     private ArrayList<Video> videos;
     private String orderBy;
+    //查询的关键字
+    private String whatToSearch;
+
+    public String getWhatToSearch() {
+        return whatToSearch;
+    }
+
+    public void setWhatToSearch(String whatToSearch) {
+        this.whatToSearch = whatToSearch;
+    }
 
     public int getId() {
         return id;
@@ -148,7 +160,18 @@ public class VideoAction extends ActionSupport {
 
     //根据视频名字匹配相关视频
     public String showSearchResultOfVideo(){
-        videos = (ArrayList<Video>) getVideoService().findVideosByName(video.getVideoName());
+        videos = (ArrayList<Video>) getVideoService().findVideosByName(whatToSearch);
         return SUCCESS;
+    }
+
+    //上传视频,注意传过来的参数
+    public String addVideo() {
+        video.setUpTime(new Timestamp(System.currentTimeMillis()));
+        System.out.println(video.getVideoWrap() + "********" + video.getVideoSrc());
+        int result = videoService.addVideo(video);
+        if (result >= 0)
+            return SUCCESS;
+        else
+            return INPUT;
     }
 }

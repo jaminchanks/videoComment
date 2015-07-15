@@ -3,6 +3,7 @@ package com.jaminchanks.dao;
 import com.jaminchanks.common.BaseDao;
 import com.jaminchanks.pojo.Video;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,4 +14,6 @@ public interface VideoDao extends BaseDao<Video> {
     Video findVideoById(int id);
     List<Video> findVideosByUserId(int userId);
     List<Video> findVideosByName(String videoName);
+
+    Serializable addVideo(Video video);
 }

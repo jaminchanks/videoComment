@@ -20,8 +20,8 @@
     <s:property value="#session.user.head"/>
   </div>
 </h3>
-<div align="center"> 登陆成功！正在返回登陆前页面... </div>
-<% %>
+<div align="center"><h4> 登陆成功！ </h4></div>
+<meta http-equiv=refresh content="0.5;url=<%=session.getAttribute("forwardURL")%>">
 <s:include value="/include/bottom.jsp" />
 </body>
 </html>

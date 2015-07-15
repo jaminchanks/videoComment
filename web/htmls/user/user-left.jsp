@@ -15,11 +15,11 @@
     window.onload=function(){
       var oclick;
       var obj = new Array();
-      obj[0] = document.getElementById("myUser");
-      obj[1] = document.getElementById("videoM");
-      obj[2] = document.getElementById("accountM");
-      obj[3] = document.getElementById("friendM");
-      obj[4] = document.getElementById("userM");
+      obj[0] = document.getElementById("userMain");
+      obj[1] = document.getElementById("videoU");
+      obj[2] = document.getElementById("videoM");
+      obj[3] = document.getElementById("userM");
+      obj[4] = document.getElementById("accountM");
 
       for(var i=0;i<obj.length;i++){
         obj[i].style.color="#000";
@@ -43,20 +43,20 @@
     <div class="list-group-item">
       <a href="#">
         <img src=/resources/img/head/${user.head} "
-             width="86px" class="img-rounded"/>
+             width="86px" height="86px" class="img-rounded"/>
       </a>
       <div style="font-size: x-large;">  ${user.userName}</div>
       <div style="font-size: small;">  简介：${user.marks}</div>
     </div>
 
-    <a href="showUserDetail.action?id=${user.id}" class="list-group-item" id="myUser"><h4>用户主页</h4></a>
+    <a href="showUserDetail.action?id=${user.id}" class="list-group-item" id="userMain"><h4>用户主页</h4></a>
     <s:if test="%{#session.logonUser != null }">
+      <a href="/htmls/video/afterLogon/uploadVideo.jsp" class="list-group-item" id="videoU"><h4>发布视频</h4></a>
       <a href="#" class="list-group-item" id="videoM"><h4>视频管理</h4></a>
       <s:if test="%{#session.logonUser.identity == 99}">
-        <a href="#" class="list-group-item" id="userM"><h4>用户管理(super)</h4></a>
+        <a href="/htmls/user/afterLogon/superManager.jsp" class="list-group-item" id="userM"><h4>用户管理(super)</h4></a>
       </s:if>
-      <a href="#" class="list-group-item" id="friendM"><h4>好友管理</h4></a>
-      <a href="/htmls/user/myAccount.jsp" class="list-group-item" id="accountM"><h4>我的账号</h4></a>
+      <a href="/htmls/user/afterLogon/myAccount.jsp" class="list-group-item" id="accountM"><h4>我的账号</h4></a>
     </s:if>
   </div>
 </div>

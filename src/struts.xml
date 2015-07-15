@@ -9,10 +9,20 @@
         <constant name="struts.i18n.encoding" value="UTF-8" />
         <constant name="struts.multipart.parser" value="jakarta" />
         <constant name="struts.objectFactory.spring.autoWire" value="name" />
-        <package name="common" extends="struts-default">
+        <constant name="struts.multipart.saveDir" value="/tmp"/> <!--这里是设置上传缓存位置-->
+        <!-- struts.xml变更时是否自动重新加载 -->
+        <constant name="struts.configuration.xml.reload" value="true"/>
+        <!-- 限定上传文件最大大小4M,struts2默认maxSize为200M -->
+        <constant name="struts.multipart.maxSize" value="419430400"></constant>
+
+
+
+
+
+        <package name="user" extends="struts-default">
                 <!--用户相关 -->
                 <action name="login" class="com.jaminchanks.action.UserAction" method="login" >
-                        <result name="success">/index.jsp</result>
+                        <result name="success">/result/loginSuccess.jsp</result>
                         <result name="input">/login.jsp</result>
                 </action>
 
@@ -26,7 +36,42 @@
                         <result name="success">/index.jsp</result>
                 </action>
 
+                <action name="showUserDetail" class="com.jaminchanks.action.UserAction" method="showUserDetail">
+                        <result name="success">/htmls/user/user-main.jsp</result>
+                        <result name="error">/result/pleaseLogin.jsp</result>
+                </action>
 
+                <action name="updateUser" class="com.jaminchanks.action.UserAction" method="updateUser">
+                        <!-- 配置fileUpload拦截器 -->
+                        <interceptor-ref name="fileUpload">
+                                <!-- 配置允许上传的文件类型-->
+                                <param name="allowedTypes">image/x-ms-bmp,image/jpeg,image/gif,image/png,image/x-png,application/excel,application/vnd.ms-excel</param>
+                                <!-- 配置允许上传的文件大小 -->
+                                <param name="maximumSize">2048000</param>
+                        </interceptor-ref>
+                        <interceptor-ref name="defaultStack"></interceptor-ref>
+                        <!-- 配置上传文件的保存的相对路径 -->
+                        <param name="savePath">/resources/img/head</param>
+                        <!-- 配置逻辑视图和实际资源的对应关系 -->
+                        <result name="success">/htmls/user/afterLogon/myAccount.jsp</result>
+                </action>
+
+                <!--查找用户-->
+                <action name="searchUsersByUserName" class="com.jaminchanks.action.UserAction" method="showSearchResultOfUserName">
+                        <result name="success">/htmls/searchResult/resultOfUser.jsp</result>
+                </action>
+
+                <!-- 封号和激活账户-->
+                <action name="banUser" class="com.jaminchanks.action.UserAction" method="banUser">
+                        <result name="success">/result/deleteSuccessed.jsp</result>
+                </action>
+                <action name="activeUser" class="com.jaminchanks.action.UserAction" method="activeUser">
+                        <result name="success">/result/deleteSuccessed.jsp</result>
+                </action>
+
+        </package>
+
+        <package name="video" extends="struts-default">
                 <!-- 视频相关-->
                 <action name="showVideosByCatalog4" class="com.jaminchanks.action.VideoAction" method="showVideosByCatalog4">
                         <result name="success">/index.jsp</result>
@@ -44,27 +89,18 @@
                         <result name="success">/htmls/user/user-up.jsp</result>
                 </action>
 
-                <action name="showResultOfVideos" class="com.jaminchanks.action.VideoAction" method="showSearchResultOfVideo">
-                        <result name="success">/htmls/searchResult/result.jsp</result>
+                <action name="searchVideosByName" class="com.jaminchanks.action.VideoAction" method="showSearchResultOfVideo">
+                        <result name="success">/htmls/searchResult/resultOfVideo.jsp</result>
                 </action>
 
-                <!-- 用户相关 -->
-                <action name="showUserDetail" class="com.jaminchanks.action.UserAction" method="showUserDetail">
-                        <result name="success">/htmls/user/user-main.jsp</result>
-                        <result name="error">/result/pleaseLogin.jsp</result>
+                <action name="addVideo" class="com.jaminchanks.action.VideoAction" method="addVideo">
+                        <result name="success">/index.jsp</result>
+                        <result name="input">/register.jsp</result>
                 </action>
+        </package>
 
-                <action name="updateUser" class="com.jaminchanks.action.UserAction" method="updateUser">
-                        <result name="success">/htmls/user/myAccount.jsp</result>
-                </action>
-
-                <!-- 测试 -->
-                <action name="testAction" class="com.jaminchanks.action.testAction">
-                        <result name="success">/include/top.jsp</result>
-                        <result name="input">/logonTest.jsp</result>
-                </action>
-
-                <!-- 评论相关 -->
+        <!-- 评论相关 -->
+        <package name="comment" extends="struts-default">
                 <action name="addComment" class="com.jaminchanks.action.CommentAction" method="addComment">
                         <result name="success" type="redirectAction">showVideoComment</result>
                         <result name="login">/result/pleaseLogin.jsp</result>
@@ -79,4 +115,49 @@
                         <result name="success" type="redirectAction">showVideoComment</result>
                 </action>
         </package>
+
+        <!-- 验证码 -->
+        <!-- action 定义 -->
+        <package name="mystruts" extends="struts-default">
+                <action name="SecurityCodeImageAction" class="com.jaminchanks.action.SecurityCodeImageAction">
+                        <result name="success" type="stream">
+                                <param name="contentType">image/jpeg</param>
+                                <param name="inputName">imageStream</param>
+                                <param name="bufferSize">2048</param>
+                        </result>
+                </action>
+        </package>
+
+        <!-- 上传视频的两个action-->
+        <package name="forTest" extends="struts-default">
+               <action name="uploadVideo" class="com.jaminchanks.action.UploadVideo">
+                       <!-- 配置fileUpload拦截器 -->
+                       <interceptor-ref name="fileUpload">
+                               <param name="allowedTypes">video/mp4</param>
+                               <param name="maximumSize">918429260</param>
+                       </interceptor-ref>
+                       <interceptor-ref name="defaultStack"></interceptor-ref>
+                       <param name="savePath">/resources/videos</param>
+                       <result name="success">/result/uploadSuccessed.jsp</result>
+                       <result name="input">/result/uploadFailed.jsp</result>
+               </action>
+
+
+                <action name="uploadVideoWrap" class="com.jaminchanks.action.UploadVideoWrap">
+                        <!-- 配置fileUpload拦截器 -->
+                        <interceptor-ref name="fileUpload">
+                                <!-- 配置允许上传的文件类型-->
+                                <param name="allowedTypes">image/x-ms-bmp,image/jpeg,image/gif,image/png,image/x-png,application/excel,application/vnd.ms-excel</param>
+                                <!-- 配置允许上传的文件大小 -->
+                                <param name="maximumSize">2048000</param>
+                        </interceptor-ref>
+                        <interceptor-ref name="defaultStack"></interceptor-ref>
+                        <!-- 配置上传文件的保存的相对路径 -->
+                        <param name="savePath">/resources/img/wrap</param>
+                        <!-- 配置逻辑视图和实际资源的对应关系 -->
+                        <result name="success">/result/uploadSuccessed.jsp</result>
+                        <result name="input">/result/uploadFailed.jsp</result>
+                </action>
+        </package>
+
 </struts>

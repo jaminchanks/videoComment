@@ -5,6 +5,7 @@ import com.jaminchanks.dao.CommentDao;
 import com.jaminchanks.pojo.Comment;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class CommentDaoImpl extends BaseDaoHibernate4Impl<Comment> implements Co
     @Override
     public Serializable addComment(Comment comment) {
         comment.setIsBaned(0);
+        comment.setCommentTime(new Timestamp(System.currentTimeMillis()));
         return save(comment);
     }
 

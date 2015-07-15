@@ -23,11 +23,18 @@ public interface UserService {
 
     //根据id查询用户
     User findUserById(int id);
-
+    //根据用户名模糊搜索用户
+    List<User> findUsersByUserName(String userName);
     //根据hql语句查询用户
     List<User> findUsers(String hql, Object... params);
 
     //改
     void updateUser(User user);
+
+    //封号
+    void banUser(User user);
+    //解封账号
+    void activeUser(User user);
+
 
 }

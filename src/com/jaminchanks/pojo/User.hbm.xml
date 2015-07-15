@@ -32,5 +32,8 @@
         <property name="head">
             <column name="head" sql-type="varchar" length="160"/>
         </property>
+        <property name="isBaned">
+            <column name="isBaned" sql-type="int" />
+        </property>
     </class>
 </hibernate-mapping>

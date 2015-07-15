@@ -56,6 +56,7 @@
     <div class="col-md-2 column"></div>
     <div class="col-md-8 column" style="background: rgba(238, 238, 238, 0.96);">
       <h3><s:actionmessage/></h3>
+      <s:hidden name="user.isBaned" value="0" />
       <form class="form-signin" role="form" action="register.action" method="post" >
         <h2 class="form-signin-heading">用户注册</h2>
         帐号 <input type="text" class="form-control" placeholder="account"
